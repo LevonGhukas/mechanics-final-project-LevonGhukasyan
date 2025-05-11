@@ -86,17 +86,6 @@ Initialize to create particles and grid.
 Start/Step to begin simulation.
 Check particles_log.txt for results.
 
-📂 Project Structure
-```java
-.
-├── src/
-│   └── PackingCirclesApp.java     # Main simulation
-├── particles_log.txt              # Output file (auto-generated)
-├── docs/                          # (optional) screenshots
-│   ├── simulation.png
-│   └── controller.png
-└── README.me
-```
 ✅ Built for Mechanics Final Project
 🧠 Powered by Open Source Physics + Java
 Levon Ghukasyan
