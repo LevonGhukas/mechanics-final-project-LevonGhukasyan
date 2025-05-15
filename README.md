@@ -89,3 +89,5 @@ Check particles_log.txt for results.
 ✅ Built for Mechanics Final Project
 🧠 Powered by Open Source Physics + Java
 Levon Ghukasyan
+
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/a81537e9-6852-467c-81b1-69d1c0e52109" />
