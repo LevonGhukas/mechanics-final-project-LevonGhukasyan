@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="ChooseWorkspaceDialogSettings">
-		<item value="306" key="DIALOG_Y_ORIGIN"/>
-		<item value="458" key="DIALOG_X_ORIGIN"/>
+		<item key="DIALOG_Y_ORIGIN" value="306"/>
+		<item key="DIALOG_X_ORIGIN" value="458"/>
 	</section>
 	<section name="ExternalProjectImportWizard">
-		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
-		<item value="true" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID" value="true"/>
+		<section name="ExternalProjectImportWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="490"/>
+			<item key="DIALOG_Y_ORIGIN" value="282"/>
+			<item key="DIALOG_WIDTH" value="586"/>
+			<item key="DIALOG_HEIGHT" value="703"/>
+			<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
+		</section>
 	</section>
 	<section name="WORKBENCH_SETTINGS">
 		<list key="ENABLED_TRANSFERS">
@@ -15,12 +22,12 @@
 	<section name="org.eclipse.ui.views.problem">
 	</section>
 	<section name="CleanDialogSettings">
-		<item value="500" key="DIALOG_WIDTH"/>
-		<item value="true" key="BUILD_NOW"/>
-		<item value="true" key="BUILD_ALL"/>
-		<item value="314" key="DIALOG_Y_ORIGIN"/>
-		<item value="424" key="DIALOG_HEIGHT"/>
-		<item value="707" key="DIALOG_X_ORIGIN"/>
-		<item value="false" key="TOGGLE_SELECTED"/>
+		<item key="DIALOG_WIDTH" value="500"/>
+		<item key="BUILD_NOW" value="true"/>
+		<item key="BUILD_ALL" value="true"/>
+		<item key="DIALOG_Y_ORIGIN" value="314"/>
+		<item key="DIALOG_HEIGHT" value="424"/>
+		<item key="DIALOG_X_ORIGIN" value="707"/>
+		<item key="TOGGLE_SELECTED" value="false"/>
 	</section>
 </section>

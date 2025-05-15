@@ -17,10 +17,10 @@ public class PackingCirclesApp extends AbstractSimulation implements Drawable {
   DrawingPanel panel;
   DrawingFrame window;
   Particle[] particles;
-  int N = 20;
+  int N = 100;
   double boxWidth = 12;
   double boxHeight = 12;
-  int gridSize = 2; // cell width/height (tune this)
+  int gridSize = 5; // cell width/height (tune this)
   int cols, rows;
   ArrayList<Particle>[][] grid;
 
@@ -117,12 +117,35 @@ public class PackingCirclesApp extends AbstractSimulation implements Drawable {
 	    particles[i].ay = 0;
 	  }
 
-	  // Loop over each cell
+	  double G = 50.0;           // Gravity strength toward center
+	  double repulsionK = 200.0; // Repulsion when too close
+	  double epsilon = 0.01;
+
+	  double centerX = boxWidth / 2.0;
+	  double centerY = boxHeight / 2.0;
+
+	  for (int i = 0; i < N; i++) {
+	    Particle p = particles[i];
+
+	    // Distance to center
+	    double dx = centerX - p.x;
+	    double dy = centerY - p.y;
+	    double distSq = dx * dx + dy * dy + epsilon;
+	    double dist = Math.sqrt(distSq);
+
+	    double nx = dx / dist;
+	    double ny = dy / dist;
+
+	    // Gravity toward center
+	    double Fgravity = G * p.mass / distSq;
+	    p.ax += Fgravity * nx;
+	    p.ay += Fgravity * ny;
+	  }
+
+	  // Optional: add repulsion between particles to avoid overlap
 	  for (int col = 0; col < cols; col++) {
 	    for (int row = 0; row < rows; row++) {
 	      for (Particle pi : grid[col][row]) {
-
-	        // Loop over this and neighboring cells
 	        for (int dx = -1; dx <= 1; dx++) {
 	          for (int dy = -1; dy <= 1; dy++) {
 	            int nc = col + dx;
@@ -134,26 +157,23 @@ public class PackingCirclesApp extends AbstractSimulation implements Drawable {
 
 	              double dx2 = pj.x - pi.x;
 	              double dy2 = pj.y - pi.y;
-	              double dist = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+	              double distSq = dx2 * dx2 + dy2 * dy2 + epsilon;
+	              double dist = Math.sqrt(distSq);
 	              double minDist = pi.radius + pj.radius;
 
-	              if (dist == 0) continue;
-
-	              double nx = dx2 / dist;
-	              double ny = dy2 / dist;
-
-	              double forceMag = 0;
 	              if (dist < minDist) {
-	                forceMag += 100 * (minDist - dist);
-	              }
-	              if (dist > minDist && dist < 4.0) {
-	                forceMag -= 5 * (dist - minDist);
-	              }
+	                double overlap = minDist - dist;
+	                double nx = dx2 / dist;
+	                double ny = dy2 / dist;
 
-	              double damping = 0.5;
+	                double Frep = repulsionK * overlap;
 
-	              pi.ax += (forceMag * nx - damping * pi.vx) / pi.mass;
-	              pi.ay += (forceMag * ny - damping * pi.vy) / pi.mass;
+	                // Apply repulsion
+	                pi.ax -= Frep * nx / pi.mass;
+	                pi.ay -= Frep * ny / pi.mass;
+	                pj.ax += Frep * nx / pj.mass;
+	                pj.ay += Frep * ny / pj.mass;
+	              }
 	            }
 	          }
 	        }
@@ -162,13 +182,15 @@ public class PackingCirclesApp extends AbstractSimulation implements Drawable {
 	  }
 	}
 
+
   
   public void doStep() {
-	 
+
 	  if (particles == null || grid == null) {
-		  System.out.println("Simulation not initialized. Click 'Initialize' first.");
-		  return;
-		}
+	    System.out.println("Simulation not initialized. Click 'Initialize' first.");
+	    return;
+	  }
+
 	  double dt = 0.01;
 
 	  // 1. Clear and reassign particles to grid
@@ -189,7 +211,17 @@ public class PackingCirclesApp extends AbstractSimulation implements Drawable {
 	  // 2. Compute forces now that grid is ready
 	  computeForces();
 
-	  // 3. Verlet velocity update and wall bouncing
+	  // 3. Position update using Verlet
+	  for (int i = 0; i < N; i++) {
+	    Particle p = particles[i];
+	    p.x += p.vx * dt + 0.5 * p.ax * dt * dt;
+	    p.y += p.vy * dt + 0.5 * p.ay * dt * dt;
+	  }
+
+	  // 4. Recompute forces at new positions
+	  computeForces();
+
+	  // 5. Velocity update and wall bouncing
 	  for (int i = 0; i < N; i++) {
 	    Particle p = particles[i];
 	    p.vx += 0.5 * p.ax * dt;
@@ -216,7 +248,6 @@ public class PackingCirclesApp extends AbstractSimulation implements Drawable {
 	  panel.repaint();
 	  saveParticleStates("particles_log.txt");
 	  System.out.printf("Step bounding box area: %.4f%n", computeBoundingBoxArea());
-
 	}
 
 

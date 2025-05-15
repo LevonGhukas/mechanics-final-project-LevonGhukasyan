@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <dirs>
-<entry loc="C:\Program Files\Java\jre7" stamp="1330462797495"/>
+    <entry loc="/Volumes/Eclipse/Eclipse.app/Contents/Eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.macosx.aarch64_17.0.10.v20240120-1143/jre" stamp="1709828258000"/>
+    <entry loc="/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home" stamp="1698260714314"/>
+    <entry loc="C:\Program Files\Java\jre7" stamp="1330462797495"/>
+    <entry loc="/Library/Java/JavaVirtualMachines/temurin-24.jdk/Contents/Home" stamp="1744744810000"/>
+    <entry loc="/Users/levonghukasyan/Library/Java/JavaVirtualMachines/openjdk-19.0.2/Contents/Home" stamp="1674321517078"/>
 </dirs>
